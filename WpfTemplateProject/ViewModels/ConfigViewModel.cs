@@ -53,6 +53,8 @@ namespace ImgDiffTool.ViewModels
             TIFFolder = Properties.Settings.Default.TIFFolder;
             JPEGFolder = Properties.Settings.Default.JPEGFolder;
             DestinationFolder = Properties.Settings.Default.DestinationFolder;
+
+            DisplayName = "Configuration";
         }
 
         public void Apply()
