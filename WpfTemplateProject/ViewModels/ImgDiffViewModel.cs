@@ -101,8 +101,8 @@ namespace ImgDiffTool.ViewModels
 
                 var jpeg = Path.Combine(_jpegFolder, Path.ChangeExtension(basename, ".jpg"));
                 var eps = Path.Combine(_jpegFolder, Path.ChangeExtension(basename, ".eps"));
-                var jpegDestiny = Path.Combine(_destinationFolder, Path.GetFileName(jpeg) + ".jpg");
-                var epsDestiny = Path.Combine(_destinationFolder, Path.GetFileName(eps) + ".eps");
+                var jpegDestiny = Path.Combine(_destinationFolder, Path.GetFileName(jpeg));
+                var epsDestiny = Path.Combine(_destinationFolder, Path.GetFileName(eps));
 
                 if (File.Exists(jpeg))
                 {
