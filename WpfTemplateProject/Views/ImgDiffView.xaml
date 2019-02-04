@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="ImgDiffTool.Views.ImgDiffView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImgDiffTool.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:imgDiffTool="clr-namespace:ImgDiffTool"
+             mah:DialogParticipation.Register="{Binding}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <imgDiffTool:ZoomBorder Grid.Row="0" 
+                                ClipToBounds="True" 
+                                Background="Gray"
+                                Grid.Column="0" >
+            <Image x:Name="Image1" Stretch="Fill"/>
+        </imgDiffTool:ZoomBorder>
+        <imgDiffTool:ZoomBorder Grid.Row="0"
+                                Grid.Column="1" 
+                                ClipToBounds="True" 
+                                Background="Gray">
+            <Image x:Name="Image2" Stretch="Fill"/>
+        </imgDiffTool:ZoomBorder>
+        <StackPanel Grid.Row="1"
+                    Grid.Column="0" 
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="Previous" Content="Prev" FontSize="16"/>
+            <Button x:Name="Move" Content="Move" FontSize="16"/>
+            <Button x:Name="Next" Content="Next" FontSize="16"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
