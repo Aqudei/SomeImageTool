@@ -5,21 +5,31 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImgDiffTool.Views"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
-             mc:Ignorable="d"
-             d:DesignHeight="338.534" d:DesignWidth="533.127" SizeToContent="WidthAndHeight">
+             mc:Ignorable="d" IsCloseButtonEnabled="False" IsMinButtonEnabled="False" IsMaxRestoreButtonEnabled="False"
+             d:DesignHeight="691.134" d:DesignWidth="546.727" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
     <Grid Margin="4">
         <Label Content="Original TIF Folder:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="TIFFolder" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498"/>
         <Label Content="Original TIF Folder:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="JPEGFolder" HorizontalAlignment="Left" Height="23" Margin="10,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498"/>
         <Label Content="JPG Folder:" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="DestinationFolder" HorizontalAlignment="Left" Height="23" Margin="10,203,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498"/>
-        <Label Content="Move Folder:" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="Apply" Content="Apply" HorizontalAlignment="Left" Margin="264,264,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="Quit" Content="Quit" HorizontalAlignment="Left" Margin="173,264,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Apply" Content="Apply" HorizontalAlignment="Left" Margin="270,616,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="Quit" Content="Quit" HorizontalAlignment="Left" Margin="179,616,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="BrowseTIF" Content="Browse" HorizontalAlignment="Left" Margin="433,71,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="BrowseJPEG" Content="Browse" HorizontalAlignment="Left" Margin="433,146,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="BrowseDestination" Content="Browse" HorizontalAlignment="Left" Margin="433,234,0,0" VerticalAlignment="Top" Width="75"/>
+        <GroupBox Header="MoveSignature Destinations" HorizontalAlignment="Left" Height="422" Margin="10,189,0,0" VerticalAlignment="Top" Width="498">
+            <Grid>
+                <TextBox x:Name="SignatureFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,46,10,314"/>
+                <Label Content="Signature Folder:" Margin="10,10,354,347" FontWeight="Bold"/>
+                <Button x:Name="BrowseSignature" Content="Browse" Margin="393,79,10,267"/>
+                <TextBox x:Name="IssueFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,159,10,201"/>
+                <Label Content="Issue Folder:" Margin="10,123,354,234" FontWeight="Bold"/>
+                <Button x:Name="BrowseIssue" Content="Browse" Margin="393,192,10,158"/>
+                <TextBox x:Name="BorderFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,271,10,89"/>
+                <Label Content="Border Folder:" Margin="10,235,354,122" FontWeight="Bold"/>
+                <Button x:Name="BrowseBorder" Content="Browse" Margin="393,304,10,45"/>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </mah:MetroWindow>

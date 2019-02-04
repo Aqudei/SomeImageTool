@@ -18,7 +18,7 @@ namespace ImgDiffTool.Views
     /// <summary>
     /// Interaction logic for ConfigView.xaml
     /// </summary>
-    public partial class ConfigView 
+    public partial class ConfigView
     {
         public ConfigView()
         {

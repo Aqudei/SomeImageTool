@@ -50,12 +50,36 @@ namespace ImgDiffTool.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DestinationFolder {
+        public string SignatureFolder {
             get {
-                return ((string)(this["DestinationFolder"]));
+                return ((string)(this["SignatureFolder"]));
             }
             set {
-                this["DestinationFolder"] = value;
+                this["SignatureFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IssueFolder {
+            get {
+                return ((string)(this["IssueFolder"]));
+            }
+            set {
+                this["IssueFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BorderFolder {
+            get {
+                return ((string)(this["BorderFolder"]));
+            }
+            set {
+                this["BorderFolder"] = value;
             }
         }
     }
