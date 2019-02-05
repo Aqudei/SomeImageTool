@@ -17,7 +17,7 @@
         <Button x:Name="Quit" Content="Quit" HorizontalAlignment="Left" Margin="179,616,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="BrowseTIF" Content="Browse" HorizontalAlignment="Left" Margin="433,71,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="BrowseJPEG" Content="Browse" HorizontalAlignment="Left" Margin="433,146,0,0" VerticalAlignment="Top" Width="75"/>
-        <GroupBox Header="MoveSignature Destinations" HorizontalAlignment="Left" Height="422" Margin="10,189,0,0" VerticalAlignment="Top" Width="498">
+        <GroupBox Header="Move Destinations" HorizontalAlignment="Left" Height="422" Margin="10,189,0,0" VerticalAlignment="Top" Width="498">
             <Grid>
                 <TextBox x:Name="SignatureFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,46,10,314"/>
                 <Label Content="Signature Folder:" Margin="10,10,354,347" FontWeight="Bold"/>
