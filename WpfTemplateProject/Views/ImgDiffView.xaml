@@ -24,7 +24,7 @@
             <imgDiffTool:ZoomBorder Grid.Row="0" 
                 ClipToBounds="True"
                 Grid.Column="0" >
-                <Image x:Name="Image1" Stretch="UniformToFill"/>
+                <Image x:Name="Image1"/>
             </imgDiffTool:ZoomBorder>
             <TextBlock VerticalAlignment="Top" x:Name="Filename1" FontSize="18" FontStretch="Expanded" Foreground="White">
                 <TextBlock.Background>
@@ -40,7 +40,7 @@
 
             <imgDiffTool:ZoomBorder Grid.Row="0" 
                 ClipToBounds="True">
-                <Image x:Name="Image2" Stretch="UniformToFill"/>
+                <Image x:Name="Image2"/>
             </imgDiffTool:ZoomBorder>
             <TextBlock VerticalAlignment="Top" x:Name="Filename2" FontSize="18" FontStretch="Expanded" Foreground="White">
                 <TextBlock.Background>
