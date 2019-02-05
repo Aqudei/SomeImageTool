@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
 using MahApps.Metro.Controls.Dialogs;
@@ -27,6 +28,8 @@ namespace ImgDiffTool.ViewModels
         private string _borderFolder;
         private string _filename1;
         private string _filename2;
+        private string _stretch1 = "Uniform";
+        private string _stretch2 = "Uniform";
 
 
         public BitmapImage Image1
@@ -44,6 +47,8 @@ namespace ImgDiffTool.ViewModels
         public ImgDiffViewModel(IDialogCoordinator dialogCoordinator)
         {
             _dialogCoordinator = dialogCoordinator;
+
+            Stretches.AddRange(Enum.GetNames(typeof(Stretch)));
         }
 
         protected override void OnViewReady(object view)
@@ -112,6 +117,20 @@ namespace ImgDiffTool.ViewModels
                 _tifIndex = 0;
 
             await UpdateDisplay();
+        }
+
+        public List<string> Stretches { get; set; } = new List<string>();
+
+        public string Stretch1
+        {
+            get => _stretch1;
+            set => Set(ref _stretch1, value);
+        }
+
+        public string Stretch2
+        {
+            get => _stretch2;
+            set => Set(ref _stretch2, value);
         }
 
         private async Task CopyFiles(string tifSource, string destination)

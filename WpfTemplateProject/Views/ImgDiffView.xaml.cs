@@ -24,5 +24,15 @@ namespace ImgDiffTool.Views
         {
             InitializeComponent();
         }
+
+        private void ResetZoom1_Click(object sender, RoutedEventArgs e)
+        {
+            Zoom1.Reset();
+        }
+
+        private void ResetZoom2_Click(object sender, RoutedEventArgs e)
+        {
+            Zoom2.Reset();
+        }
     }
 }

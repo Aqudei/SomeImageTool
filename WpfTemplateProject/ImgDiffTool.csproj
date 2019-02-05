@@ -185,6 +185,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\StringToStretchConverter.cs" />
     <Compile Include="Extention.cs" />
     <Compile Include="ZoomBorder.cs" />
     <Page Include="Views\ConfigView.xaml">
