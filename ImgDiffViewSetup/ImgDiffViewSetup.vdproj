@@ -1378,6 +1378,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
     }
@@ -4316,15 +4324,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:ImgDiffViewSetup"
-        "ProductCode" = "8:{DE138F99-D981-43CD-80D7-1E6B56078EF7}"
-        "PackageCode" = "8:{419993C8-DEDB-4925-A9EF-3A695B5D6620}"
+        "ProductCode" = "8:{4A118BCF-5F0B-408B-9801-C4D56E8CA889}"
+        "PackageCode" = "8:{61A1F02D-93B5-4130-B47A-78755E167722}"
         "UpgradeCode" = "8:{0DDE6D96-B569-4B08-856C-1F11C0CA875E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.7"
+        "ProductVersion" = "8:2.0.0"
         "Manufacturer" = "8:Shade Soft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
