@@ -51,7 +51,7 @@ namespace ImgDiffTool.ViewModels
             Stretches.AddRange(Enum.GetNames(typeof(Stretch)));
         }
 
-        protected override void OnViewReady(object view)
+        protected override async void OnViewReady(object view)
         {
             _tifFolder = Properties.Settings.Default.TIFFolder;
             _jpegFolder = Properties.Settings.Default.JPEGFolder;
@@ -59,8 +59,47 @@ namespace ImgDiffTool.ViewModels
             _issueFolder = Properties.Settings.Default.IssueFolder;
             _borderFolder = Properties.Settings.Default.BorderFolder;
 
-            _tiffs = Directory.GetFiles(_tifFolder, "*.tif", SearchOption.TopDirectoryOnly);
-            Execute.OnUIThreadAsync(async () => await UpdateDisplay());
+            var controller = await _dialogCoordinator.ShowProgressAsync(this, "Please wait", "Loading images...");
+            try
+            {
+                controller.SetIndeterminate();
+                await LoadImages();
+                await Execute.OnUIThreadAsync(async () => await UpdateDisplay());
+            }
+            finally
+            {
+                await controller.CloseAsync();
+            }
+        }
+
+        private async Task LoadImages()
+        {
+            await Task.Run(async () =>
+            {
+                _tiffs = Directory.GetFiles(_tifFolder, "*.tif", SearchOption.TopDirectoryOnly);
+                Array.Sort(_tiffs);
+
+                var lastViewed = Properties.Settings.Default.LastViewedImage;
+                if (string.IsNullOrWhiteSpace(lastViewed))
+                {
+                    _tifIndex = 0;
+                }
+                else
+                {
+                    var index = Array.IndexOf(_tiffs, lastViewed);
+                    if (index < 0)
+                    {
+                        _tifIndex = 0;
+                    }
+                    else
+                    {
+                        var result = await _dialogCoordinator.ShowMessageAsync(this,
+                            "Please choose", $"Do you want to continue viewing from {lastViewed}",
+                            MessageDialogStyle.AffirmativeAndNegative);
+                        _tifIndex = result == MessageDialogResult.Affirmative ? index : 0;
+                    }
+                }
+            });
         }
 
         //public bool CanNext { get; set; }
@@ -74,14 +113,16 @@ namespace ImgDiffTool.ViewModels
             try
             {
                 await Execute.OnUIThreadAsync(() =>
-                 {
-                     var imagePath = _tiffs[_tifIndex];
-                     Filename1 = Path.Combine(_jpegFolder, Path.ChangeExtension(Path.GetFileName(imagePath), ".jpg"));
-                     Image1 = Filename1.ToBitmapImage();
+                {
+                    var imagePath = _tiffs[_tifIndex];
+                    Properties.Settings.Default.LastViewedImage = imagePath;
+                    Properties.Settings.Default.Save();
+                    Filename1 = Path.Combine(_jpegFolder, Path.ChangeExtension(Path.GetFileName(imagePath), ".jpg"));
+                    Image1 = Filename1.ToBitmapImage();
 
-                     Filename2 = imagePath;
-                     Image2 = Filename2.ToBitmapImage();
-                 });
+                    Filename2 = imagePath;
+                    Image2 = Filename2.ToBitmapImage();
+                });
             }
             catch
             {
