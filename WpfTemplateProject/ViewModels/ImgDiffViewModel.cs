@@ -153,13 +153,7 @@ namespace ImgDiffTool.ViewModels
         //public bool CanNext { get; set; }
         //public bool CanPrevious { get; set; }
 
-        private int CountTiffs()
-        {
-            using (var db = new ImageDiffContext())
-            {
-                return db.MyImages.Count();
-            }
-        }
+
 
         private async Task UpdateDisplay()
         {
@@ -329,15 +323,11 @@ namespace ImgDiffTool.ViewModels
         {
             try
             {
-                var tiffsCount = CountTiffs();
-                if (tiffsCount > 0 && _tifIndex < tiffsCount)
-                {
-                    var tiff = GetTiff(_tifIndex);
-                    if (tiff == null)
-                        return;
+                var tiff = GetTiff(_tifIndex);
+                if (tiff == null)
+                    return;
 
-                    await CopyFiles(tiff.Filename, _signatureFolder);
-                }
+                await CopyFiles(tiff.Filename, _signatureFolder);
             }
             catch (Exception e)
             {
@@ -350,14 +340,12 @@ namespace ImgDiffTool.ViewModels
         {
             try
             {
-                var tiffsCount = CountTiffs();
-                if (tiffsCount > 0 && _tifIndex < tiffsCount)
-                {
-                    var tiff = GetTiff(_tifIndex);
-                    if (tiff == null)
-                        return;
-                    await CopyFiles(tiff.Filename, _issueFolder);
-                }
+
+                var tiff = GetTiff(_tifIndex);
+                if (tiff == null)
+                    return;
+                await CopyFiles(tiff.Filename, _issueFolder);
+
             }
             catch (Exception e)
             {
@@ -370,14 +358,12 @@ namespace ImgDiffTool.ViewModels
         {
             try
             {
-                var tiffsCount = CountTiffs();
-                if (tiffsCount > 0 && _tifIndex < tiffsCount)
-                {
-                    var tiff = GetTiff(_tifIndex);
-                    if (tiff == null)
-                        return;
-                    await CopyFiles(tiff.Filename, _borderFolder);
-                }
+
+                var tiff = GetTiff(_tifIndex);
+                if (tiff == null)
+                    return;
+                await CopyFiles(tiff.Filename, _borderFolder);
+
             }
             catch (Exception e)
             {
