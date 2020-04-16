@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Threading;
 using Caliburn.Micro;
 using ImgDiffTool.ViewModels;
 using MahApps.Metro.Controls.Dialogs;
@@ -17,6 +18,10 @@ namespace ImgDiffTool
             Initialize();
         }
 
+        protected override void OnUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            MessageBox.Show($"{e.Exception.Message}\n{e.Exception.StackTrace}");
+        }
         protected override void BuildUp(object instance)
         {
             _container.BuildUp(instance);

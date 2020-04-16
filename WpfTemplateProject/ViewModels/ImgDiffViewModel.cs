@@ -106,48 +106,46 @@ namespace ImgDiffTool.ViewModels
 
         private async Task LoadImages()
         {
-            await Task.Run(async () =>
+
+            var result = await _dialogCoordinator.ShowMessageAsync(this, "Please confirm", "Data already exist in the database. Do you want to use this existing data?",
+                MessageDialogStyle.AffirmativeAndNegative);
+            if (result == MessageDialogResult.Negative)
             {
-                var result = await _dialogCoordinator.ShowMessageAsync(this, "Please confirm", "Data already exist in the database. Do you want to use this existing data?",
-                    MessageDialogStyle.AffirmativeAndNegative);
-                if (result == MessageDialogResult.Negative)
+                using (var db = new ImageDiffContext())
                 {
-                    using (var db = new ImageDiffContext())
+                    if (db.MyImages.Any())
                     {
-                        if (db.MyImages.Any())
-                        {
-                            db.MyImages.RemoveRange(db.MyImages.ToList());
-                            db.SaveChanges();
-                        }
-                    }
-
-                    var myImageIndex = 0;
-                    using (var db = new ImageDiffContext())
-                    {
-                        foreach (var tif in Directory.EnumerateFiles(_tifFolder, "*.tif", SearchOption.TopDirectoryOnly))
-                        {
-                            db.MyImages.Add(new MyImage
-                            {
-                                Filename = tif,
-                                Order = myImageIndex
-                            });
-                            myImageIndex++;
-                        }
-
+                        db.MyImages.RemoveRange(db.MyImages.ToList());
                         db.SaveChanges();
-                        _tifIndex = 0;
                     }
                 }
-                else
+
+                var myImageIndex = 0;
+                using (var db = new ImageDiffContext())
                 {
-                    using (var db = new ImageDiffContext())
+                    foreach (var tif in Directory.EnumerateFiles(_tifFolder, "*.tif", SearchOption.TopDirectoryOnly))
                     {
-                        var lastTiff = db.MyImages
-                            .FirstOrDefault(i => i.Filename == Settings.Default.LastViewedImage);
-                        _tifIndex = lastTiff?.Order ?? 0;
+                        db.MyImages.Add(new MyImage
+                        {
+                            Filename = tif,
+                            Order = myImageIndex
+                        });
+                        myImageIndex++;
                     }
+
+                    db.SaveChanges();
+                    _tifIndex = 0;
                 }
-            });
+            }
+            else
+            {
+                using (var db = new ImageDiffContext())
+                {
+                    var lastTiff = db.MyImages
+                        .FirstOrDefault(i => i.Filename == Settings.Default.LastViewedImage);
+                    _tifIndex = lastTiff?.Order ?? 0;
+                }
+            }
         }
 
         //public bool CanNext { get; set; }
