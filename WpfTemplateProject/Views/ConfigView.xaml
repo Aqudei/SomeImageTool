@@ -9,9 +9,9 @@
              d:DesignHeight="691.134" d:DesignWidth="546.727" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner">
     <Grid Margin="4">
         <Label Content="Original TIF Folder:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TIFFolder" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498"/>
+        <TextBox x:Name="TIFFolder" HorizontalAlignment="Left" Height="23" Margin="10,40,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498" IsReadOnly="True"/>
         <Label Content="Original TIF Folder:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="JPEGFolder" HorizontalAlignment="Left" Height="23" Margin="10,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498"/>
+        <TextBox x:Name="JPEGFolder" HorizontalAlignment="Left" Height="23" Margin="10,115,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="498" IsReadOnly="True"/>
         <Label Content="JPG Folder:" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
         <Button x:Name="Apply" Content="Apply" HorizontalAlignment="Left" Margin="270,616,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="Quit" Content="Quit" HorizontalAlignment="Left" Margin="179,616,0,0" VerticalAlignment="Top" Width="75"/>
@@ -19,13 +19,13 @@
         <Button x:Name="BrowseJPEG" Content="Browse" HorizontalAlignment="Left" Margin="433,146,0,0" VerticalAlignment="Top" Width="75"/>
         <GroupBox Header="Move Destinations" HorizontalAlignment="Left" Height="422" Margin="10,189,0,0" VerticalAlignment="Top" Width="498">
             <Grid>
-                <TextBox x:Name="SignatureFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,46,10,314"/>
+                <TextBox x:Name="SignatureFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,46,10,314" IsReadOnly="True"/>
                 <Label Content="Signature Folder:" Margin="10,10,354,347" FontWeight="Bold"/>
                 <Button x:Name="BrowseSignature" Content="Browse" Margin="393,79,10,267"/>
-                <TextBox x:Name="IssueFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,159,10,201"/>
+                <TextBox x:Name="IssueFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,159,10,201" IsReadOnly="True"/>
                 <Label Content="Issue Folder:" Margin="10,123,354,234" FontWeight="Bold"/>
                 <Button x:Name="BrowseIssue" Content="Browse" Margin="393,192,10,158"/>
-                <TextBox x:Name="BorderFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,271,10,89"/>
+                <TextBox x:Name="BorderFolder" TextWrapping="Wrap" Text="TextBox" Margin="10,271,10,89" IsReadOnly="True"/>
                 <Label Content="Border Folder:" Margin="10,235,354,122" FontWeight="Bold"/>
                 <Button x:Name="BrowseBorder" Content="Browse" Margin="393,304,10,45"/>
             </Grid>

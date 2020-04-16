@@ -198,7 +198,8 @@ namespace ImgDiffTool.ViewModels
             set => Set(ref _filename1, value);
         }
 
-        public async Task Next()
+
+        private async Task NextAction()
         {
             using (var db = new ImageDiffContext())
             {
@@ -210,6 +211,14 @@ namespace ImgDiffTool.ViewModels
                 _tifIndex = tif.Order;
                 await UpdateDisplay();
             }
+        }
+
+        public IEnumerable<IResult> Next()
+        {
+            yield return Task.Run(async () =>
+            {
+                await NextAction();
+            }).AsResult();
         }
 
         public IEnumerable<IResult> Previous()
@@ -273,7 +282,7 @@ namespace ImgDiffTool.ViewModels
 
             File.Copy(tifSource, tifDestiny, true);
 
-            await Next();
+            await NextAction();
 
             if (File.Exists(jpeg))
             {
@@ -319,57 +328,67 @@ namespace ImgDiffTool.ViewModels
             }
         }
 
-        public async Task MoveSignature()
+        public IEnumerable<IResult> MoveSignature()
         {
-            try
+            yield return Task.Run(async () =>
             {
-                var tiff = GetTiff(_tifIndex);
-                if (tiff == null)
-                    return;
+                try
+                {
+                    var tiff = GetTiff(_tifIndex);
+                    if (tiff == null)
+                        return;
 
-                await CopyFiles(tiff.Filename, _signatureFolder);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-                await _dialogCoordinator.ShowMessageAsync(this, "Something went wrong", e.Message);
-            }
+                    await CopyFiles(tiff.Filename, _signatureFolder);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                    await _dialogCoordinator.ShowMessageAsync(this, "Something went wrong", e.Message);
+                }
+            }).AsResult();
+
         }
 
-        public async Task MoveIssue()
+        public IEnumerable<IResult> MoveIssue()
         {
-            try
+            yield return Task.Run(async () =>
             {
+                try
+                {
 
-                var tiff = GetTiff(_tifIndex);
-                if (tiff == null)
-                    return;
-                await CopyFiles(tiff.Filename, _issueFolder);
+                    var tiff = GetTiff(_tifIndex);
+                    if (tiff == null)
+                        return;
+                    await CopyFiles(tiff.Filename, _issueFolder);
 
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-                await _dialogCoordinator.ShowMessageAsync(this, "Something went wrong", e.Message);
-            }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                    await _dialogCoordinator.ShowMessageAsync(this, "Something went wrong", e.Message);
+                }
+
+            }).AsResult();
         }
 
-        public async Task MoveBorder()
+        public IEnumerable<IResult> MoveBorder()
         {
-            try
+            yield return Task.Run(async () =>
             {
+                try
+                {
+                    var tiff = GetTiff(_tifIndex);
+                    if (tiff == null)
+                        return;
+                    await CopyFiles(tiff.Filename, _borderFolder);
 
-                var tiff = GetTiff(_tifIndex);
-                if (tiff == null)
-                    return;
-                await CopyFiles(tiff.Filename, _borderFolder);
-
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e);
-                await _dialogCoordinator.ShowMessageAsync(this, "Something went wrong", e.Message);
-            }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e);
+                    await _dialogCoordinator.ShowMessageAsync(this, "Something went wrong", e.Message);
+                }
+            }).AsResult();
         }
     }
 }
