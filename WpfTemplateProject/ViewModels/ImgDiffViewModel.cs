@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Caliburn.Micro;
@@ -32,7 +33,7 @@ namespace ImgDiffTool.ViewModels
         private string _filename2;
         private string _stretch1 = "Uniform";
         private string _stretch2 = "Uniform";
-
+        private bool isBusy;
 
         public BitmapImage Image1
         {
@@ -67,6 +68,10 @@ namespace ImgDiffTool.ViewModels
                 controller.SetIndeterminate();
                 await LoadImages();
                 await UpdateDisplay();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
@@ -148,18 +153,16 @@ namespace ImgDiffTool.ViewModels
             }
         }
 
-        //public bool CanNext { get; set; }
-        //public bool CanPrevious { get; set; }
-
-
-
         private async Task UpdateDisplay()
         {
+            IsBusy = true;
+
             using (var db = new ImageDiffContext())
             {
                 var tiff = db.MyImages.FirstOrDefault(i => i.Order == _tifIndex && !i.Untracked);
                 if (tiff == null)
                 {
+                    IsBusy = false;
                     return;
                 }
 
@@ -180,6 +183,10 @@ namespace ImgDiffTool.ViewModels
                 catch
                 {
                     // ignored
+                }
+                finally
+                {
+                    isBusy = false;
                 }
             }
         }
@@ -218,7 +225,9 @@ namespace ImgDiffTool.ViewModels
                 await NextAction();
             }).AsResult();
         }
-
+        public bool CanMoveIssue => !IsBusy;
+        public bool CanNext => !IsBusy;
+        public bool CanPrevious => !IsBusy;
         public IEnumerable<IResult> Previous()
         {
             yield return Task.Run(async () =>
@@ -250,6 +259,19 @@ namespace ImgDiffTool.ViewModels
         {
             get => _stretch2;
             set => Set(ref _stretch2, value);
+        }
+        public bool IsBusy
+        {
+            get => isBusy;
+            set
+            {
+                Set(ref isBusy, value);
+                NotifyOfPropertyChange(nameof(CanNext));
+                NotifyOfPropertyChange(nameof(CanMoveBorder));
+                NotifyOfPropertyChange(nameof(CanPrevious));
+                NotifyOfPropertyChange(nameof(CanMoveSignature));
+                NotifyOfPropertyChange(nameof(CanMoveIssue));
+            }
         }
 
         private async Task CopyFiles(string tifSource, string destination)
@@ -326,6 +348,7 @@ namespace ImgDiffTool.ViewModels
             }
         }
 
+        public bool CanMoveSignature => !IsBusy;
         public IEnumerable<IResult> MoveSignature()
         {
             yield return Task.Run(async () =>
@@ -369,6 +392,7 @@ namespace ImgDiffTool.ViewModels
             }).AsResult();
         }
 
+        public bool CanMoveBorder => !IsBusy;
         public IEnumerable<IResult> MoveBorder()
         {
             yield return Task.Run(async () =>
