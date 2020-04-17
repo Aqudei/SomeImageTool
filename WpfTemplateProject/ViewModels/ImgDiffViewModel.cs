@@ -33,7 +33,7 @@ namespace ImgDiffTool.ViewModels
         private string _filename2;
         private string _stretch1 = "Uniform";
         private string _stretch2 = "Uniform";
-        private bool isBusy;
+        private bool _isBusy = false;
 
         public BitmapImage Image1
         {
@@ -156,14 +156,13 @@ namespace ImgDiffTool.ViewModels
 
         private async Task UpdateDisplay()
         {
-            IsBusy = true;
-
+            Execute.OnUIThread(() => IsBusy = true);
             using (var db = new ImageDiffContext())
             {
                 var tiff = db.MyImages.FirstOrDefault(i => i.Order == _tifIndex && !i.Untracked);
                 if (tiff == null)
                 {
-                    IsBusy = false;
+                    Execute.OnUIThread(() => IsBusy = false);
                     return;
                 }
 
@@ -187,7 +186,7 @@ namespace ImgDiffTool.ViewModels
                 }
                 finally
                 {
-                    isBusy = false;
+                    Execute.OnUIThread(() => IsBusy = false);
                 }
             }
         }
@@ -263,10 +262,10 @@ namespace ImgDiffTool.ViewModels
         }
         public bool IsBusy
         {
-            get => isBusy;
+            get => _isBusy;
             set
             {
-                Set(ref isBusy, value);
+                Set(ref _isBusy, value);
                 NotifyOfPropertyChange(nameof(CanNext));
                 NotifyOfPropertyChange(nameof(CanMoveBorder));
                 NotifyOfPropertyChange(nameof(CanPrevious));
