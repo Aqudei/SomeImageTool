@@ -71,7 +71,8 @@ namespace ImgDiffTool.ViewModels
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"[{ex.Message}]\n{ex.StackTrace}",
+                    ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
